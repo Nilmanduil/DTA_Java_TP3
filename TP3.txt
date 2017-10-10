@@ -1,0 +1,73 @@
+TP 3 : POO - 2 heures
+
+Exercice 1 – Interfaces
+
+1. Écrivez l’interface StringFilter contenant l’unique méthode String
+filter(String s). Les implémentations de cette méthode doivent transformer
+la chaîne s puis de retourner le résultat de cette transformation.
+2. Écrivez les classes suivantes implémentant l’interface StringFilter :
+— UpperCaseStringFilter convertit les caractères de s en majuscules.
+— LowerCaseStringFilter convertit les caractères de s en minuscules.
+— PrefixStringFilter conserve les n premiers caractères de s. La valeur
+de n est fournie lors de la construction d’une instance de la classe.
+— PostfixStringFilter conserve les n derniers caractères de s.
+— AsciiStringFilter conserve les caractères dont le code est inférieur
+à 128.
+— UnaccentStringFilter supprime les accents.
+3. Écrivez la méthode statique String[] filter(String[] strings,
+StringFilter filter) qui applique le filtre aux chaînes du tableau
+strings et qui retourne un tableau contenant les chaînes transformées.
+4. Écrivez la classe CompositeStringFilter qui implémente l’interface
+StringFilter et qui applique successivement sur la chaîne s les filtres du
+tableau StringFilter[] filters passé au constructeur.
+
+Exercice 2 – Formules
+
+1. Décrivez l’interface Formula et écrivez les classes Variable, Sum et Product
+de façon à obtenir le comportement suivant :
+
+Variable x = new Variable("x", 2.5);
+Variable y = new Variable("y", 4);
+Formula formula = new Sum(x, new Product(y, new Sum(x, y)));
+System.out.println(formula.asString()); // "(x+(y*(x+y))"
+System.out.println(formula.asValue()); // "28.5"
+x.set(5);
+System.out.println(formula.asValue()); // "41.0
+
+2. Modifiez les classes Sum et Product de façon à réaliser les opérations sur
+un ensemble de formules (ainsi, les formules ne fonctionnent pas avec seulement 2 paramètres, mais 'n' paramètres). 
+Ces formules sont passées au constructeur sous la
+forme d’un tableau. Faites en sorte que le programme proposé à la question 1
+fonctionne après la modification
+
+Ex : 
+- Formula[] formule_sum = {new Variable("x", 2.5), new Variable("y", 4), new Variable("z", 1)}
+- System.out.println(new Sum(formule_sum).asValue()); // "7.5"
+
+
+Exercice 3 – Tableau dynamique
+
+Écrivez la classe Vector qui gère un tableau dont la capacité varie dynamiquement.
+Elle contient deux champs : un tableau d’entiers array et un entier
+size. Les entiers présents dans le vecteur sont les size premiers éléments du
+tableau array. Le constructeur prend en paramètre la taille initiale du tableau
+array (c’est-à-dire la capacité initiale du vecteur). Si la taille du tableau array
+ne permet plus de conserver les size éléments du vecteur, elle est automatiquement
+augmentée à l’aide de la méthode ensureCapacity. La classe fournit les
+méthodes suivantes :
+— void ensureCapacity(int capacity) assure une contenance de capacity
+éléments. Si la capacité actuelle du vecteur est inférieure à capacity,
+la capacité est augmentée. La nouvelle capacité doit être égale à
+max(capacity; 2 X capacité actuelle). Les nouvelles cases du tableau array
+sont initialisées à zéro. Le nombre d’éléments (c’est-à-dire la valeur de size)
+n’est pas modifié.
+— void resize(int size) modifie la taille du vecteur. Si la capacité est
+inférieure à s, elle est augmentée et les nouvelles cases sont initialisées à 0.
+— int size() retourne la taille actuelle du vecteur.
+— boolean isEmpty() retourne true si le vecteur est vide, false sinon.
+— void add(int element) ajoute un élément à la fin du vecteur.
+— void set(int index, int element) modifie l’élément à la position i dans
+le tableau. Si le tableau a moins de i+1 éléments, la méthode ne fait rien.
+— int get(int index) retourne l’élément à la position index dans le
+vecteur. Si le vecteur contient moins de index+1 éléments, la méthode
+retourne 0.
